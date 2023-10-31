@@ -1,0 +1,74 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+<main>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Сервис создания рассылок</h1>
+                <p class="lead text-muted">Простой сервис создания рассылок для информирования и привлечения
+                    клиентов.</p>
+                {% if not user.is_authenticated %}
+                <p class="lead text-muted">Авторизуйтесь, чтобы начать пользоваться сервисом.</p>
+                {% endif %}
+                <a href="{% url 'mailing:mailing_list' %}" class="btn btn-secondary my-2">
+                    Перейти к списку рассылок
+                </a>
+                <a href="{% url 'mailing:client_list' %}" class="btn btn-secondary my-2">
+                    Перейти к списку клиентов
+                </a>
+                <a href="{% url 'mailing:message_list' %}" class="btn btn-secondary my-2">
+                    Перейти к списку сообщений
+                </a>
+
+            </div>
+        </div>
+    </section>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="card-text">
+                                Количество рассылок: {{ mailings }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="card-text">
+                                Количество активных рассылок: {{ mailings_is_active }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="card-text">
+                                Количество уникальных клиентов: {{ unique_clients_count }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>
+            {% for object in random_blog_list %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="card-text">
+                            {{ object }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            </p>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Удалить сообщение</h1>
+        </div>
+    </div>
+</section>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <p>Хотите удалить сообщение "{{ object.subject }}"?</p>
+            <div class="btn-group">
+                <button type="submit"
+                        class="btn btn-sm btn-outline-danger">Удалить
+                </button>
+                <a href="{% url 'mailing:message_list' %}" type="button"
+                   class="btn btn-sm btn-outline-secondary">Отмена
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

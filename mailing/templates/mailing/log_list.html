@@ -1,0 +1,40 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+<main>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for object in object_list %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <td>Статус попытки</td>
+                                    <td>{{ object.attempt_status }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ответ почтового сервера</td>
+                                    <td>{{ object.response }}</td>
+                                </tr>
+                            </table>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="#" type="button"
+                                       class="btn btn-sm btn-outline-secondary">Редактировать
+                                    </a>
+                                    <a href="#" type="button"
+                                       class="btn btn-sm btn-outline-danger">Удалить
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

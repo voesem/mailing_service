@@ -1,0 +1,79 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+<!-- <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Рассылка {{ object.pk }}</h1>
+        </div>
+    </div>
+</section> -->
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="col">
+            <div class="card shadow-sm">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="card-header">
+                        Рассылка {{ object.pk }}
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <td>Время рассылки:</td>
+                                <td>{{ object.mailing_duration }}</td>
+                            </tr>
+                            <tr>
+                                <td>Периодичность:</td>
+                                <td>{{ object.frequency }}</td>
+                            </tr>
+                            <tr>
+                                <td>Статус рассылки:</td>
+                                <td>{{ object.mailing_status }}</td>
+                            </tr>
+                            <tr>
+                                <td>Клиенты:</td>
+                                <td>
+                                    {% for client in object.client.all  %}
+                                    <p>{{ client }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Тема письма:</td>
+                                <td>{{ object.message.subject }}</td>
+                            </tr>
+                            <tr>
+                                <td>Тело письма:</td>
+                                <td>{{ object.message.body }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            {% if object.mailing_status == "launched" %}
+                            <a href="{% url 'mailing:launch_mailing' object.pk %}"
+                               type="button" class="btn btn-outline-danger">
+                                Завершить рассылку
+                            </a>
+                            {% else %}
+                            <a href="{% url 'mailing:launch_mailing' object.pk %}"
+                               type="button" class="btn btn-outline-success">
+                                Запустить рассылку
+                            </a>
+                            {% endif %}
+                            {% if object.creator == request.user%}
+                            <a href="{% url 'mailing:update_mailing' object.pk %}" type="button"
+                               class="btn btn-outline-primary">Редактировать
+                            </a>
+                            <a href="{% url 'mailing:delete_mailing' object.pk %}" type="button"
+                               class="btn btn-outline-danger">Удалить
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
